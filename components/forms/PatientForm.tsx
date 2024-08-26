@@ -2,21 +2,23 @@
  
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod"//zod is used for validation
 import { Button } from "@/components/ui/button"
 import {Form } from "@/components/ui/form"
 import CustomFormField from "../CustomFormField"
-import SubmitButton from "../ui/SubmitButton"
+import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
+import { createUser } from "@/lib/actions/patient.actions"
+import "react-phone-number-input/style.css";
 
 export enum FormFieldType{
     INPUT='input',
     TEXTAREA='textarea',
-    PHONE_INPUT='phoneinput',
+    PHONE_INPUT='phoneInput',
     CHECKBOX='checkbox',
-    DATE_PICKER='datepicker',
+    DATE_PICKER='datePicker',
     SELECT='select',
     SKELETON='skeleton',
 }
@@ -26,7 +28,7 @@ export enum FormFieldType{
  
 const PatientForm=()=>{
   const router = useRouter();  
-  const [isLoading, setisLoading] = useState(false)  
+  const [isLoading, setIsLoading] = useState(false)  
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
@@ -38,14 +40,19 @@ const PatientForm=()=>{
  
   
 async function onSubmit({name,email,phone}: z.infer<typeof UserFormValidation>) {
-    setisLoading(true)
+    setIsLoading(true)
+    console.log("form submitted")
     try {
-        // const userData={name,email,phone}
-        // const user=await createUser(userData)
-        // if(user) router.push(`/patients/${user.$id}/register`)
+        const userData={name,email,phone}
+        const user=await createUser(userData)
+        if(user){ 
+          console.log("Redirecting to:", `/patients/${user.$id}/register`);
+          router.push(`/patients/${user.$id}/register`)
+        }
     } catch (error) {
         console.log(error)
     }
+    setIsLoading(false);
   }
   return (
     <Form {...form}>

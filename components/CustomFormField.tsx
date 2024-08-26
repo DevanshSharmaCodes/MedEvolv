@@ -14,6 +14,7 @@ import {Control} from "react-hook-form"
 import { FormFieldType } from "./forms/PatientForm"
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { E164Number } from "libphonenumber-js/core";
 
 interface CustomProps{
     control: Control<any>,
@@ -80,7 +81,7 @@ const CustomFormField = (props:CustomProps) => {
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className="flex-1">
+                <FormItem className="flex-1">  
                     {fieldType!==FormFieldType.CHECKBOX && label &&(
                         <FormLabel>{label}</FormLabel>
                     )}
