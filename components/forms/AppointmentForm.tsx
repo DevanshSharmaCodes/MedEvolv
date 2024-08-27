@@ -70,7 +70,7 @@ async function onSubmit(values: z.infer<typeof AppointmentFormValidation>) {
             const appointment=await createAppointment(appointmentData)
             if(appointment){
                 form.reset()
-                router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`)
+                router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
             }
         }
     } catch (error) {
