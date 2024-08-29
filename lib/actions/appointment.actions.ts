@@ -1,10 +1,10 @@
 "use server"
 import { ID, Query } from "node-appwrite"
-import { APPOINTMENT_COLLECTION_ID, BUCKET_ID, DATABASE_ID, databases, ENDPOINT, PROJECT_ID } from "../appwrite.config"
+import { APPOINTMENT_COLLECTION_ID, BUCKET_ID, DATABASE_ID, databases, ENDPOINT, messaging, PROJECT_ID } from "../appwrite.config"
 import { parseStringify } from "../utils"
 import { Appointment } from "@/types/appwrite.types"
 import { revalidatePath } from "next/cache"
-
+import { formatDateTime } from "../utils"
 export const createAppointment=async(appointment:CreateAppointmentParams)=>{
     try {
         const newAppointment= await databases.createDocument(
@@ -63,6 +63,7 @@ export const getRecentAppointmentList = async () => {
             ...counts,
             documents:appointments.documents
         }
+        // console.log(parseStringify(data))
         return parseStringify(data)
     } catch (error) {
         console.log(error)
@@ -80,8 +81,30 @@ export const updateAppointment=async({appointmentId,userId,appointment,type}:Upd
         if(!updatedAppointment){
             throw new Error('Appointment not found.')
         }
+
+        const smsMessage=`
+        Hi, this is MedEvolv. 
+        ${type==='schedule'?`Your appointment with Dr. ${appointment.primaryPhysician} on ${formatDateTime(appointment.schedule).dateTime} has been successfully scheduled.`
+        :`We regret to inform you that your appointment has been cancelled for the following reason: ${appointment.cancellationReason}`
+        }
+        `
+        await sendSMSNotification(userId,smsMessage)
         revalidatePath('/admin')
         return parseStringify(updatedAppointment)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const sendSMSNotification=async(userId:string,content:string)=>{
+    try {
+        const message=await messaging.createSms(
+            ID.unique(),
+            content,
+            [],
+            [userId]
+        )
+        return parseStringify(message)
     } catch (error) {
         console.log(error)
     }
