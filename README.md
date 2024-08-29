@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 MedEvolv - Patient Management System
 
-## Getting Started
+## Overview
+**MedEvolv** is a comprehensive Patient Management System designed to streamline healthcare services by offering a seamless interface for managing patient information, appointments, and communication between patients and healthcare providers. Built using modern web technologies, MedEvolv provides an intuitive user experience for both patients and administrators.
 
-First, run the development server:
+## ✨ Features
+- **📝 Patient Registration:** Allows new patients to register, providing necessary personal and medical information.
+- **📅 Appointment Scheduling:** Patients can schedule appointments with their preferred healthcare providers, and administrators can manage these appointments.
+- **🔄 Appointment Management:** Administrators can view, schedule, and cancel appointments, with automatic notifications sent to patients.
+- **📁 Patient Information Management:** Securely stores patient data including personal information, medical history, and identification documents.
+- **📲 SMS Notifications:** Automatic SMS notifications for appointment confirmations and cancellations using Twilio.
+- **📊 Admin Dashboard:** A dedicated dashboard for administrators to manage appointments and view statistics.
+- **🔍 Error Tracking and Monitoring:** Integrated with **Sentry** for real-time error tracking and monitoring, ensuring any issues are quickly identified and resolved.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
+- **Frontend:**
+  - **Next.js** - A React framework for building fast, scalable web applications.
+  - **Tailwind CSS** - A utility-first CSS framework for styling.
+  - **shadcn/ui** - A set of reusable UI components built on top of Tailwind CSS.
+  
+- **Backend:**
+  - **Appwrite** - A secure and scalable open-source backend server for Web, Mobile, and Flutter developers. Used for user authentication, database management, file storage, and messaging.
+  - **Node.js** - JavaScript runtime for building server-side applications.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Validation:**
+  - **Zod** - TypeScript-first schema declaration and validation library.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Error Tracking:**
+  - **Sentry** - Real-time error monitoring to identify and fix issues efficiently.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Additional Libraries:**
+  - **react-hook-form** - For managing form state and validation.
+  - **react-datepicker** - For date and time selection.
+  - **react-phone-number-input** - For international phone number input.
 
-## Learn More
+- **Deployment:**
+  - **Vercel** - For hosting the frontend and backend of the application.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**MedEvolv** - Revolutionizing Patient Management for a better healthcare experience.
